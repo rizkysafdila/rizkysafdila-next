@@ -30,7 +30,7 @@ export const Icons = {
 export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    // { href: "/about", icon: UserIcon, label: "About" },
+    { href: "/about", icon: UserIcon, label: "About" },
     { href: "/projects", icon: BriefcaseBusinessIcon, label: "Projects" },
   ],
   contact: {

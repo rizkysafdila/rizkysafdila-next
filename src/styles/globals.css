@@ -118,5 +118,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* background-image:
+      linear-gradient(to right, #6b7280 1px, transparent 1px),
+      linear-gradient(to bottom, #6b7280 1px, transparent 1px);
+    background-size: 6rem 4rem;
+    background-repeat: repeat; */
   }
 }
