@@ -38,7 +38,7 @@ export function TechCard() {
       </CardHeader>
       <CardContent className="p-2">
         <BlurFade delay={0.75} direction="down" inView>
-          <Marquee pauseOnHover className="[--duration:30s]">
+          <Marquee className="[--duration:44s]">
             <div className="flex items-center gap-2">
               {skills.map((skill, i) => (
                 <SkillBadge key={i} skill={skill} />
@@ -47,7 +47,7 @@ export function TechCard() {
           </Marquee>
         </BlurFade>
         <BlurFade delay={0.75} direction="up" inView>
-          <Marquee reverse pauseOnHover className="[--duration:30s]">
+          <Marquee reverse className="[--duration:44s]">
             <div className="flex items-center gap-2">
               {skills.map((skill, i) => (
                 <SkillBadge key={i} skill={skill} />

@@ -37,17 +37,17 @@ export const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "#",
+        url: "https://github.com/rizkysafdila",
         icon: Icons.github,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "#",
+        url: "https://www.linkedin.com/in/rizkysafdila",
         icon: Icons.linkedin,
       },
       Email: {
         name: "Send Email",
-        url: "#",
+        url: "mailto:rizkysafdila@gmail.com",
         icon: Icons.email,
       },
     },
