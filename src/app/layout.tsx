@@ -21,7 +21,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.svg" sizes="any" />
       <body
         className={cn(
-          "min-h-screen bg-background antialiased max-w-5xl mx-auto py-12 sm:py-24 px-6",
+          "min-h-screen bg-background antialiased max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6",
           publicSans.className,
           syne.variable,
         )}

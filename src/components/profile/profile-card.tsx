@@ -54,7 +54,7 @@ export function ProfileCard({ data, className }: IProfileCard & React.ComponentP
             </div>
 
             <Image src={data?.photo}
-              className="rounded-t-xl w-full max-h-96 object-cover"
+              className="rounded-t-xl w-full max-h-77 object-cover"
               alt="My Profile Photo"
               width={500}
               height={500}
@@ -71,7 +71,7 @@ export function ProfileCard({ data, className }: IProfileCard & React.ComponentP
             </div>
           </BlurFade>
           <BlurFade delay={0.75} inView>
-            <p className="text-sm">
+            <p className="text-sm text-lime-600 dark:text-lime-500">
               {data?.jobTitle}
             </p>
           </BlurFade>

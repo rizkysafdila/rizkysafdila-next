@@ -12,12 +12,12 @@ const profileData = {
 
 export default function Home() {
   return (
-    <div className="my-3 grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="md:col-span-1">
+    <div className="my-16 md:my-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="lg:col-span-1 max-w-sm mx-auto">
         <ProfileCard data={profileData} />
       </div>
 
-      <div className="md:col-span-2 flex flex-col gap-4">
+      <div className="lg:col-span-2 flex flex-col gap-4">
         <SummaryCard />
         <TechCard />
       </div>

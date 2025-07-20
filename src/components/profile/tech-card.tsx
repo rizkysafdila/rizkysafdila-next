@@ -12,7 +12,7 @@ const skills = [
   'Javascript',
   'TailwindCSS',
   'Vuejs',
-  'Nuxt',
+  'Nuxtjs',
   'React',
   'Nextjs',
   // 'Pinia',
@@ -45,14 +45,14 @@ export function TechCard({ className }: React.ComponentProps<"div">) {
           <h2 className="text-lg font-semibold">Technologies</h2>
         </CardHeader>
         <CardContent className="p-2">
-          <Marquee pauseOnHover className="[--duration:20s]">
+          <Marquee pauseOnHover className="[--duration:30s]">
             <div className="flex items-center gap-2">
               {skills.map((skill, i) => (
                 <SkillBadge key={i} skill={skill} />
               ))}
             </div>
           </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s]">
+          <Marquee reverse pauseOnHover className="[--duration:30s]">
             <div className="flex items-center gap-2">
               {skills.map((skill, i) => (
                 <SkillBadge key={i} skill={skill} />

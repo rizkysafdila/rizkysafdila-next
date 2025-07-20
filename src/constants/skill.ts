@@ -1,7 +1,7 @@
 export const SKILL_ICON_MAP: Record<string, string> = {
   Typescript: "devicon:typescript",
   Javascript: "devicon:javascript",
-  Nuxt: "devicon:nuxt",
+  Nuxtjs: "devicon:nuxt",
   TailwindCSS: "devicon:tailwindcss",
   Vuejs: "devicon:vuejs",
   React: "devicon:react",

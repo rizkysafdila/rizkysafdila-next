@@ -15,7 +15,7 @@ export function SkillBadge({ skill, size = 20 }: ISkillBadgeProps) {
   return (
     <div className={
       cn(
-        "flex items-center gap-2 px-3 py-1.5 rounded-lg border",
+        "flex items-center gap-2 px-3 py-1.5 rounded-md border",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01]",
         // dark styles

@@ -33,7 +33,7 @@ export function SummaryCard({ className }: React.ComponentProps<"div">) {
           </BlurFade>
           <BlurFade delay={0.75} inView>
             <p className="text-muted-foreground text-sm text-pretty">
-              I’m committed to continuous learning and staying up-to-date with modern web technologies. I thrive in collaborative environments and take pride in delivering high-quality user experiences that make a real impact.
+              I’m committed to continuous learning and staying up-to-date with modern web technologies. I thrive in delivering high-quality user experiences that make a real impact.
             </p>
           </BlurFade>
         </CardContent>
