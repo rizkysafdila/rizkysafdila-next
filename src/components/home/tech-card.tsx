@@ -18,6 +18,7 @@ const skills = [
   'PHP',
   'Laravel',
   'Nodejs',
+  'Express',
   'Adonisjs',
   'MySQL',
   'PostgreSQL',
