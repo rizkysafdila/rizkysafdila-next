@@ -22,7 +22,7 @@ export function ProfileCard({ data, className }: IProfileCard & React.ComponentP
 
   return (
     <Card className={cn(
-      "p-0 max-w-sm w-full shadow-none border-none",
+      "p-0 w-full shadow-none border-none",
       className
     )}>
       <MagicCard
@@ -61,7 +61,7 @@ export function ProfileCard({ data, className }: IProfileCard & React.ComponentP
             />
           </BlurFade>
         </CardContent>
-        <CardFooter className="p-4 block">
+        <CardFooter className="px-6 py-4 block">
           <BlurFade delay={0.5} inView>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-semibold">

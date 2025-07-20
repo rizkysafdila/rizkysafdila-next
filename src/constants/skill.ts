@@ -1,0 +1,18 @@
+export const SKILL_ICON_MAP: Record<string, string> = {
+  Typescript: "devicon:typescript",
+  Javascript: "devicon:javascript",
+  Nuxt: "devicon:nuxt",
+  TailwindCSS: "devicon:tailwindcss",
+  Vuejs: "devicon:vuejs",
+  React: "devicon:react",
+  Nextjs: "devicon:nextjs",
+  Laravel: "devicon:laravel",
+  Adonisjs: "devicon:adonisjs",
+  Nodejs: "devicon:nodejs",
+  PHP: "devicon:php",
+  MySQL: "devicon:mysql",
+  PostgreSQL: "devicon:postgresql",
+  MongoDB: "devicon:mongodb",
+  Github: 'devicon:github',
+  Gitlab: 'devicon:gitlab',
+};
