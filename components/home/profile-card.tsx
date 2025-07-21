@@ -11,7 +11,6 @@ import { BlurFade } from "@/components/magicui/blur-fade"
 import { BaseCard } from "@/components/base-card"
 
 interface IProfileCard {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any
 }
 

@@ -10,7 +10,7 @@ export default async function Projects() {
 
   return (
     <div className="my-16 md:my-5">
-      <Card className="relative w-full overflow-hidden">
+      <Card className="relative w-full overflow-hidden shadow-none gap-4">
         <Meteors number={30} />
         <CardHeader>
           <BlurFade delay={0.5} inView>

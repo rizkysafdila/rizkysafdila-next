@@ -17,7 +17,7 @@ export function ProjectList({ data, onView, className }: ProjectCardProps & Reac
   return (
     <Card
       className={cn(
-        "group cursor-pointer relative p-0",
+        "group cursor-pointer relative p-0 shadow-none",
         className,
       )}
       onClick={onView}
