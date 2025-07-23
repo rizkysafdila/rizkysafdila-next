@@ -25,6 +25,7 @@ const skills = [
   'MongoDB',
   "Github",
   "Gitlab",
+  "Strapi"
 ]
 
 export function TechCard() {

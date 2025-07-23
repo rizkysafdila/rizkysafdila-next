@@ -16,4 +16,5 @@ export const SKILL_ICON_MAP: Record<string, string> = {
   Github: 'devicon:github',
   Gitlab: 'devicon:gitlab',
   Express: 'devicon:express',
+  Strapi: 'logos:strapi-icon',
 };
