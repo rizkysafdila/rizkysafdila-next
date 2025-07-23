@@ -16,7 +16,7 @@ export const SKILL_ICON_MAP: Record<string, string> = {
   MongoDB: "devicon:mongodb",
   Github: 'mdi:github',
   Gitlab: 'devicon:gitlab',
-  Express: 'devicon:express',
+  Express: 'simple-icons:express',
   Strapi: 'logos:strapi-icon',
   Python: 'devicon:python',
   Flask: 'cib:flask',
