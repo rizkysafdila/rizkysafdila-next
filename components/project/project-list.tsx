@@ -7,6 +7,7 @@ import { ArrowRight, Pin } from 'lucide-react'
 import Image from 'next/image'
 import { TProject } from '@/types/project.type'
 import { cn } from '@/lib/utils'
+import { SkillIcon } from '../skill'
 
 type ProjectCardProps = {
   data: TProject
@@ -59,11 +60,11 @@ export function ProjectList({ data, onView, className }: ProjectCardProps & Reac
           <p className="text-sm text-muted-foreground line-clamp-2">
             {data?.subtitle}
           </p>
-          {/* <div className="flex flex-wrap items-center gap-2.5 mt-4">
-          {data?.tech_stacks.map((stack, i) => (
-            <TechStackIcon key={i} skill={stack} size={24} />
-          ))}
-        </div> */}
+          <div className="flex flex-wrap items-center gap-2.5 mt-4">
+            {data?.tech_stacks.map((stack, i) => (
+              <SkillIcon key={i} skill={stack} />
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>

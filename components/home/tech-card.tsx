@@ -2,31 +2,10 @@
 
 import { CardContent, CardHeader } from "@/components/ui/card"
 import { Marquee } from "@/components/magicui/marquee"
-import { SkillBadge } from "@/components/skill-badge"
+import { SkillBadge } from "@/components/skill"
 import { BaseCard } from "@/components/base-card"
 import { BlurFade } from "@/components/magicui/blur-fade"
-
-const skills = [
-  'Typescript',
-  'Javascript',
-  'TailwindCSS',
-  'Vuejs',
-  'Nuxtjs',
-  'React',
-  'Nextjs',
-  // 'Pinia',
-  'PHP',
-  'Laravel',
-  'Nodejs',
-  'Express',
-  'Adonisjs',
-  'MySQL',
-  'PostgreSQL',
-  'MongoDB',
-  "Github",
-  "Gitlab",
-  "Strapi"
-]
+import { skills } from "@/constants/skill"
 
 export function TechCard() {
 

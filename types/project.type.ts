@@ -6,7 +6,7 @@ export interface IProjectDetail {
   thumbnail_url: string
   start_date: string
   end_date: string
-  tech_stacks: string
+  tech_stacks: string[]
   source_code: string
   demo_url: string
   created_at: string

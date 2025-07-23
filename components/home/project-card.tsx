@@ -24,7 +24,7 @@ export function ProjectCard({ projects }: IProjectCardProps) {
           </h2>
           <Link
             href="/projects"
-            className="text-sm flex items-center gap-2 hover:text-blue-500 transition-colors"
+            className="text-sm flex items-center gap-2 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
           >
             View All
             <ArrowRight className="size-4" />
