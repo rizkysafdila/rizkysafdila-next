@@ -18,7 +18,7 @@ export function ProjectList({ data, onView, className }: ProjectCardProps & Reac
   return (
     <Card
       className={cn(
-        "group cursor-pointer relative p-0 shadow-none",
+        "group cursor-pointer relative p-0 shadow-none hover:scale-102 transition duration-200",
         className,
       )}
       onClick={onView}
