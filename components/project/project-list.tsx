@@ -48,7 +48,7 @@ export function ProjectList({ data, onView, className }: ProjectCardProps & Reac
               className="text-white pointer-events-none"
             >
               View Project
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
         </div>

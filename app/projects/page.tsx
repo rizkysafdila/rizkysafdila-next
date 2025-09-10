@@ -18,13 +18,12 @@ export default async function Projects() {
           </BlurFade>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap lg:flex-nowrap items-center gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-4">
             {projects?.map((project, i) => (
               <BlurFade
                 key={project?.id}
                 delay={0.5 * (i + 1)}
                 direction="up"
-                className="lg:flex-1"
                 inView
                 >
                 <ProjectList data={project} />
