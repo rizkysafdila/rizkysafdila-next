@@ -3,10 +3,6 @@
 import { CardContent, CardHeader } from "@/components/ui/card"
 import { BlurFade } from "@/components/magicui/blur-fade"
 import { BaseCard } from "@/components/base-card"
-import { Button } from "@/components/ui/button"
-import { DownloadIcon } from "lucide-react"
-import Link from "next/link"
-import { RESUME_LINK } from "@/constants"
 
 export function SummaryCard() {
   return (
@@ -14,7 +10,7 @@ export function SummaryCard() {
       <CardHeader className="px-2 py-0">
         <BlurFade delay={0.5} inView className="flex justify-between items-center-safe">
           <h2 className="text-lg font-semibold">About Me</h2>
-          <Link href={RESUME_LINK} target="_blank">
+          {/* <Link href={RESUME_LINK} target="_blank">
             <Button
               variant="outline"
               size="sm"
@@ -23,7 +19,7 @@ export function SummaryCard() {
               <DownloadIcon />
               My Resume
             </Button>
-          </Link>
+          </Link> */}
         </BlurFade>
       </CardHeader>
       <CardContent className="p-2">
