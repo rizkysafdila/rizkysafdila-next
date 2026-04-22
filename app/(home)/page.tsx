@@ -36,7 +36,7 @@ export default async function Home() {
         <div className="lg:col-span-2">
           <ProjectCard projects={projects as any} />
         </div>
-        <div className="lg:col-span-1 bg-white dark:bg-gray-950 h-full rounded-xl overflow-hidden relative flex justify-center items-center">
+        <div className="lg:col-span-1 bg-white dark:bg-gray-950 h-100 lg:h-full rounded-xl overflow-hidden relative flex justify-center items-center">
           {/* <ContactCard /> */}
           <Ripple />
 
