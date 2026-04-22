@@ -13,6 +13,7 @@ export async function fetchProjects(q?: IProjectQuery) {
     .from('projects')
     .select(`id, title, subtitle, tech_stacks, thumbnail_url, is_featured`)
     .order('is_featured', { ascending: false })
+    .order('order', { ascending: true })
 
   if (typeof q?.is_featured === 'boolean') {
     query = query.eq('is_featured', q.is_featured)

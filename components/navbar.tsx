@@ -3,7 +3,7 @@
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 
-import { ModeToggle } from "@/components/mode-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -87,7 +87,7 @@ export function Navbar() {
           <DockIcon>
             <Tooltip>
               <TooltipTrigger asChild>
-                <ModeToggle />
+                <ThemeToggle />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Theme</p>

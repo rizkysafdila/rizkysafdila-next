@@ -16,29 +16,12 @@ interface IProfileCard {
 
 export function ProfileCard({ data }: IProfileCard) {
   return (
-    <BaseCard className="p-0">
+    <BaseCard className="p-0 relative group">
+      <div className="absolute w-full h-full bg-lime-600 dark:bg-lime-500 rotate-3 group-hover:rotate-0 rounded-xl -z-10 transition-transform" />
+
       <CardContent className="p-0">
         <BlurFade delay={0.25} inView>
-          <div
-            className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs text-white hover:text-gray-100 rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
-          >
-            <span className="relative flex size-2">
-              <span
-                className={cn(
-                  "absolute inline-flex size-full rounded-full opacity-75",
-                  data?.available ? 'bg-green-500 animate-ping' : 'bg-red-500'
-                )}
-              />
-              <span
-                className={cn(
-                  "relative inline-flex size-2 scale-90 rounded-full",
-                  data?.available ? "bg-green-500" : "bg-red-500"
-                )}
-              />
-            </span>
-            {data?.available ? "Available for new projects" : "Not available at the moment"}
-          </div>
-
+          <StatusIndicator isAvailable={data?.available} />
           <Image src={data?.photo}
             className="rounded-t-xl w-full max-h-77 object-cover"
             alt="My Profile Photo"
@@ -63,5 +46,29 @@ export function ProfileCard({ data }: IProfileCard) {
         </BlurFade>
       </CardFooter>
     </BaseCard>
+  )
+}
+
+const StatusIndicator = ({ isAvailable }: { isAvailable: boolean }) => {
+  return (
+    <div
+      className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs text-white hover:text-gray-100 rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
+    >
+      <span className="relative flex size-2">
+        <span
+          className={cn(
+            "absolute inline-flex size-full rounded-full opacity-75",
+            isAvailable ? 'bg-green-500 animate-ping' : 'bg-red-500'
+          )}
+        />
+        <span
+          className={cn(
+            "relative inline-flex size-2 scale-90 rounded-full",
+            isAvailable ? "bg-green-500" : "bg-red-500"
+          )}
+        />
+      </span>
+      {isAvailable ? "Available for new projects" : "Not available at the moment"}
+    </div>
   )
 }
