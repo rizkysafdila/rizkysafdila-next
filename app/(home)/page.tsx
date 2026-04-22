@@ -4,6 +4,9 @@ import { TechCard } from "@/components/home/tech-card"
 import { ProjectCard } from "@/components/home/project-card"
 import { fetchProjects } from "@/services/project"
 import { ContactCard } from "@/components/home/contact-card"
+import { Ripple } from "@/components/ui/ripple"
+import { TextAnimate } from "@/components/magicui/text-animate"
+import { WordRotate } from "@/components/ui/word-rotate"
 
 const profileData = {
   name: 'Muhammad Rizky Safdila',
@@ -33,9 +36,22 @@ export default async function Home() {
         <div className="lg:col-span-2">
           <ProjectCard projects={projects as any} />
         </div>
-        {/* <div className="lg:col-span-1 bg-red-50 h-full rounded-xl">
-          <ContactCard />
-        </div> */}
+        <div className="lg:col-span-1 bg-white dark:bg-gray-950 h-full rounded-xl overflow-hidden relative flex justify-center items-center">
+          {/* <ContactCard /> */}
+          <Ripple />
+
+          <WordRotate
+            className="text-2xl font-semibold font-syne"
+            words={[
+              "Made with",
+              { text: "Love", color: "#EC4899" },
+              { text: "Hate", color: "#f59e0b" },
+              "and",
+              { text: "Claude", color: "#D85A30" },
+            ]}
+            duration={1500}
+          />
+        </div>
       </div>
     </div>
   )
