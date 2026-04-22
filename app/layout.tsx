@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { publicSans, syne } from "@/fonts";
 import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "rizkysafdila | Software Engineer",
@@ -39,6 +40,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Navbar />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
