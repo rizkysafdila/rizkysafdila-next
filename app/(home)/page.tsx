@@ -3,9 +3,7 @@ import { SummaryCard } from "@/components/home/summary-card"
 import { TechCard } from "@/components/home/tech-card"
 import { ProjectCard } from "@/components/home/project-card"
 import { fetchProjects } from "@/services/project"
-import { ContactCard } from "@/components/home/contact-card"
 import { Ripple } from "@/components/ui/ripple"
-import { TextAnimate } from "@/components/magicui/text-animate"
 import { WordRotate } from "@/components/ui/word-rotate"
 
 const profileData = {

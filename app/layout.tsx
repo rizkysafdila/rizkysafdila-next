@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { publicSans, syne } from "@/fonts";
 import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = {
   title: "rizkysafdila | Software Engineer",
@@ -36,8 +37,9 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
         >
-          <main>{children}</main>
           <Navbar />
+          <main>{children}</main>
+          <Logo className="text-center text-3xl md:hidden" />
         </ThemeProvider>
       </body>
     </html>
