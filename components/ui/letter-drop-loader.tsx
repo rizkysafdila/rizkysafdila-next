@@ -45,7 +45,7 @@ export function LetterDropLoader({
 
       {/* Subtitle */}
       <span
-        className="font-mono text-[10px] uppercase tracking-[3px] text-white/20"
+        className="font-mono text-xs uppercase tracking-[3px] text-foreground"
         style={{
           animation: `letterDrop 2s ease-in-out ${(allLetters.length * LETTER_DELAY + 0.1).toFixed(2)}s infinite`,
           opacity: 0,

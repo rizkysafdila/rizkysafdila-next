@@ -22,7 +22,7 @@ export function DotWaveLoader({ className }: DotWaveLoaderProps) {
         ))}
       </div>
       <span
-        className="font-mono text-[10px] uppercase tracking-[2px] text-white/20"
+        className="font-mono text-xs uppercase tracking-[2px] text-foreground"
         style={{ animation: "labelBlink 1.6s ease-in-out infinite" }}
       >
         Loading

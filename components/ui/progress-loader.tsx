@@ -33,7 +33,7 @@ export function ProgressLoader({
             style={{ width: `${count}%` }}
           />
         </div>
-        <span className="font-mono text-[11px] tracking-[2px] text-white/20">
+        <span className="font-mono text-xs tracking-[2px] text-foreground">
           {String(count).padStart(3, "0")}
         </span>
       </div>
