@@ -41,7 +41,7 @@ export function LoadingScreen({
       aria-label="Loading portfolio"
       role="status"
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0a]",
+        "fixed inset-0 z-50 flex items-center justify-center bg-background",
         "transition-opacity duration-500 ease-in-out",
         exiting ? "opacity-0" : "opacity-100",
         // Dotted background matching the rest of the portfolio
