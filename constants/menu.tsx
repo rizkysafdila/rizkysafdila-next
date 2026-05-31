@@ -1,4 +1,4 @@
-import { BriefcaseBusinessIcon, HomeIcon, MailIcon, UserIcon } from "lucide-react"
+import { BriefcaseBusinessIcon, FolderOpenIcon, HomeIcon, MailIcon } from "lucide-react"
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -30,8 +30,8 @@ export const Icons = {
 export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    // { href: "/about", icon: UserIcon, label: "About" },
-    { href: "/projects", icon: BriefcaseBusinessIcon, label: "Projects" },
+    { href: "/careers", icon: BriefcaseBusinessIcon, label: "Careers" },
+    { href: "/projects", icon: FolderOpenIcon, label: "Projects" },
   ],
   contact: {
     social: {

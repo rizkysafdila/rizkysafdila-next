@@ -27,6 +27,7 @@ export const SKILL_ICON_MAP: Record<string, string> = {
   Figma: 'devicon:figma',
   Pinia: 'logos:pinia',
   Claude: 'material-icon-theme:claude',
+  Docker: 'logos:docker-icon',
 };
 
 export const skills = [
@@ -56,4 +57,5 @@ export const skills = [
   'Storybook',
   'Vitest',
   'Claude',
+  'Docker',
 ]
