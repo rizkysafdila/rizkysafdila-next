@@ -11,4 +11,5 @@ export const syne = Syne({
 
 export const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
+  subsets: ["latin"],
 })
