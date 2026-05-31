@@ -5,23 +5,19 @@ import { ProjectCard } from "@/components/home/project-card"
 import { fetchProjects } from "@/services/project"
 import { Ripple } from "@/components/ui/ripple"
 import { WordRotate } from "@/components/ui/word-rotate"
-
-const profileData = {
-  name: 'Muhammad Rizky Safdila',
-  jobTitle: 'Software Engineer',
-  available: true,
-  verified: true,
-  photo: 'https://res.cloudinary.com/dcf1a75tn/image/upload/v1768315771/profile_images/rizky2_ibdauq.jpg',
-}
+import { fetchProfile } from "@/services/profile"
 
 export default async function Home() {
-  const { projects } = await fetchProjects({ is_featured: true })
+  const [{ profile }, { projects }] = await Promise.all([
+    fetchProfile(),
+    fetchProjects({ is_featured: true }),
+  ])
 
   return (
     <div className="my-16 md:my-5 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-1 md:max-w-sm md:mx-auto">
-          <ProfileCard data={profileData} />
+          <ProfileCard data={profile!} />
         </div>
 
         <div className="lg:col-span-2 flex flex-col gap-4">
@@ -32,7 +28,7 @@ export default async function Home() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2">
-          <ProjectCard projects={projects as any} />
+          <ProjectCard projects={projects!} />
         </div>
         <div className="lg:col-span-1 bg-white dark:bg-gray-950 h-100 lg:h-full rounded-xl overflow-hidden relative flex justify-center items-center">
           {/* <ContactCard /> */}

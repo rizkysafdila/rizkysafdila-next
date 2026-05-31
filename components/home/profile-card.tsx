@@ -9,9 +9,10 @@ import Image from "next/image"
 import { VerifiedIcon } from "lucide-react"
 import { BlurFade } from "@/components/magicui/blur-fade"
 import { BaseCard } from "@/components/base-card"
+import { IProfile } from "@/types/profile.type"
 
 interface IProfileCard {
-  data: any
+  data: IProfile
 }
 
 export function ProfileCard({ data }: IProfileCard) {
@@ -21,7 +22,7 @@ export function ProfileCard({ data }: IProfileCard) {
 
       <CardContent className="p-0">
         <BlurFade delay={0.25} inView>
-          <StatusIndicator isAvailable={data?.available} />
+          <StatusIndicator isAvailable={data?.is_available} />
           <Image src={data?.photo}
             className="rounded-t-xl w-full max-h-77 object-cover"
             alt="My Profile Photo"
@@ -36,7 +37,7 @@ export function ProfileCard({ data }: IProfileCard) {
             <h1 className="text-lg font-semibold">
               {data?.name}
             </h1>
-            {data?.verified && <VerifiedIcon className="size-5 text-blue-500" />}
+            {data?.is_verified && <VerifiedIcon className="size-5 text-blue-500" />}
           </div>
         </BlurFade>
         <BlurFade delay={0.75} inView>
