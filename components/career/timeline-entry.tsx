@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { formatPeriod } from "@/lib/utils"
+import { RichText } from "@/components/rich-text"
 import type { CareerEntry } from "@/types/career.type"
 
 interface TimelineEntryProps {
@@ -182,9 +183,10 @@ export function TimelineEntry({
         >
           <div className="overflow-hidden">
             <div className="flex flex-col gap-3">
-              <p className="font-mono text-xs leading-relaxed text-muted-foreground sm:max-w-xl">
-                {entry.description}
-              </p>
+              <RichText
+                html={entry.description}
+                className="text-xs leading-relaxed text-muted-foreground sm:max-w-xl"
+              />
 
               <div className="flex flex-wrap gap-1.5">
                 {technologies.map((tech) => (
