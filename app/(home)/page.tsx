@@ -4,8 +4,9 @@ import { TechCard } from "@/components/home/tech-card"
 import { ProjectCard } from "@/components/home/project-card"
 import { fetchProjects } from "@/services/project"
 import { Ripple } from "@/components/ui/ripple"
-import { WordRotate } from "@/components/ui/word-rotate"
+// import { WordRotate } from "@/components/ui/word-rotate"
 import { fetchProfile } from "@/services/profile"
+import { ContactInfo } from "@/components/home/contact-info"
 
 export default async function Home() {
   const [{ profile }, { projects }] = await Promise.all([
@@ -34,7 +35,7 @@ export default async function Home() {
           {/* <ContactCard /> */}
           <Ripple />
 
-          <WordRotate
+          {/* <WordRotate
             className="text-2xl font-semibold font-syne"
             words={[
               "Made with",
@@ -44,7 +45,9 @@ export default async function Home() {
               { text: "Claude", color: "#D85A30" },
             ]}
             duration={1500}
-          />
+          /> */}
+
+          <ContactInfo />
         </div>
       </div>
     </div>
