@@ -8,20 +8,22 @@ import Image from 'next/image'
 import { TProject } from '@/types/project.type'
 import { cn } from '@/lib/utils'
 import { SkillIcon } from '../skill'
+import { useProjectModal } from '@/components/project/project-modal-context'
 
 type ProjectCardProps = {
   data: TProject
-  onView?: () => void
 }
 
-export function ProjectList({ data, onView, className }: ProjectCardProps & React.ComponentProps<"div">) {
+export function ProjectList({ data, className }: ProjectCardProps & React.ComponentProps<"div">) {
+  const { open } = useProjectModal()
+
   return (
     <Card
       className={cn(
         "group cursor-pointer relative p-0 shadow-none hover:scale-102 transition duration-200",
         className,
       )}
-      onClick={onView}
+      onClick={() => open(data.id)}
     >
       <CardContent className='p-0'>
         {data?.is_featured && (

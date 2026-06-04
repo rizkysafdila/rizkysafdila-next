@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/utils/supabase/server"
+import { IProjectDetail } from "@/types/project.type"
 
 interface IProjectQuery {
   is_featured: boolean
@@ -24,7 +25,28 @@ export async function fetchProjects(q?: IProjectQuery) {
   const projects = data?.map(project => ({
     ...project,
     tech_stacks: JSON.parse(project?.tech_stacks),
-  })) 
+  }))
 
   return { projects, error }
+}
+
+export async function fetchProjectById(id: string) {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('projects')
+    .select(`
+      id, title, subtitle, description, thumbnail_url,
+      start_date, end_date, tech_stacks, source_code, demo_url,
+      created_at, is_featured,
+      project_images(id, project_id, image_url, created_at)
+    `)
+    .eq('id', id)
+    .single()
+
+  const project: IProjectDetail | null = data
+    ? { ...data, tech_stacks: JSON.parse(data.tech_stacks) }
+    : null
+
+  return { project, error }
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider"
+import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { publicSans, syne } from "@/fonts";
@@ -23,7 +23,7 @@ export default function RootLayout({
       <link rel="icon" href="/favicon.svg" sizes="any" />
       <body
         className={cn(
-          "min-h-screen bg-background antialiased max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6",
+          "min-h-screen bg-background antialiased",
           publicSans.className,
           syne.variable,
         )}
@@ -31,18 +31,17 @@ export default function RootLayout({
         <DotPattern
           className={cn(
             "fixed inset-0 z-[-1]",
-            "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+            "mask-[radial-gradient(600px_circle_at_center,white,transparent)]"
           )}
         />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-        >
-          <Navbar />
-          <main>{children}</main>
-          <Logo className="text-center text-3xl md:hidden" />
-        </ThemeProvider>
-        
+        <Providers>
+          <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6">
+            <Navbar />
+            <main>{children}</main>
+            <Logo className="text-center text-3xl md:hidden" />
+          </div>
+        </Providers>
+
         <Analytics />
       </body>
     </html>
