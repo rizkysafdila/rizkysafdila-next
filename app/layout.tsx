@@ -38,7 +38,9 @@ export default function RootLayout({
           <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6">
             <Navbar />
             <main>{children}</main>
-            <Logo className="text-center text-3xl md:hidden" />
+            <footer className="-mb-12 mt-16 sm:-mb-24 md:hidden">
+              <Logo className="block w-full select-none whitespace-nowrap text-center text-[15vw] leading-none tracking-tighter opacity-50 mask-[linear-gradient(to_bottom,black,transparent)]" />
+            </footer>
           </div>
         </Providers>
 
