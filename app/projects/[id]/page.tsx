@@ -93,12 +93,11 @@ export default async function ProjectDetail({
       </BlurFade>
 
       <BlurFade delay={0.3} inView>
-        <ProjectGallery images={images} />
-      </BlurFade>
+        <div className="rounded-2xl border bg-white/80 p-4 dark:shadow-xl backdrop-blur-3xl sm:p-6 dark:border-white/10 dark:bg-neutral-900/80">
+          <ProjectGallery images={images} />
 
-      <BlurFade delay={0.4} inView>
-        <div className="mt-6 space-y-4">
-          <div className="flex items-start justify-between gap-3">
+          <div className="mt-6 space-y-4">
+            <div className="flex items-start justify-between gap-3">
             <h1 className="text-2xl font-semibold leading-snug">{project.title}</h1>
             {project.is_featured && (
               <Badge
@@ -148,7 +147,8 @@ export default async function ProjectDetail({
                 </Button>
               )}
             </div>
-          )}
+            )}
+          </div>
         </div>
       </BlurFade>
     </div>
