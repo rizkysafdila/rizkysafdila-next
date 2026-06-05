@@ -51,3 +51,8 @@ Next.js 15 (App Router, React 19) personal portfolio. Server Components by defau
 ## Types
 
 Domain types live in `types/*.type.ts` (e.g. `IProfile` in `profile.type.ts`, `CareerEntry`/`CareerStats` in `career.type.ts`). Service select shapes should match these interfaces.
+
+## IMPORTANT!!!
+Notes:
+- No need to run `pnpm lint` every time you completed the code, i'll do it myself
+- Use conventional commit with short and descriptive message, ask me every time before you commit the changes
