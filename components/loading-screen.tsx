@@ -45,8 +45,8 @@ export function LoadingScreen({
         "transition-opacity duration-500 ease-in-out",
         exiting ? "opacity-0" : "opacity-100",
         // Dotted background matching the rest of the portfolio
-        "[background-image:radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)]",
-        "[background-size:28px_28px]"
+        "bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)]",
+        "bg-size-[28px_28px]"
       )}
     >
       {variant === "progress" && (
