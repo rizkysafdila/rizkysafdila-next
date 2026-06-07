@@ -10,7 +10,7 @@ import type { LoadingScreenProps } from "@/types/loading.type"
 import { usePageLoader } from "@/hooks/use-page-loader"
 
 export function LoadingScreen({
-  variant = "progress",
+  variant = "dot-wave",
   name = "rizky",
   accent = "safdila",
   subtitle = "Software Engineer",

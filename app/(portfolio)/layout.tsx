@@ -7,6 +7,8 @@ import { publicSans, syne } from "@/fonts";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Logo } from "@/components/logo";
 import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from "react";
+import LoadingScreen from "./loading";
 
 export const metadata: Metadata = {
   title: "rizkysafdila | Software Engineer",
@@ -37,7 +39,11 @@ export default function RootLayout({
         <Providers>
           <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6">
             <Navbar />
-            <main>{children}</main>
+            <main>
+              <Suspense fallback={<LoadingScreen variant="dot-wave" />}>
+                {children}
+              </Suspense>
+            </main>
             <footer className="-mb-12 mt-16 sm:-mb-24 md:hidden">
               <Logo className="block w-full select-none whitespace-nowrap text-center text-[15vw] leading-none tracking-tighter opacity-50 mask-[linear-gradient(to_bottom,black,transparent)]" />
             </footer>
