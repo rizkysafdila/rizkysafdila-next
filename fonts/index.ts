@@ -1,6 +1,6 @@
-import { Public_Sans, Syne, JetBrains_Mono } from "next/font/google";
+import { Syne, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 
-export const publicSans = Public_Sans({
+export const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 

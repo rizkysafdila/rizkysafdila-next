@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
-import { publicSans, syne } from "@/fonts";
+import { plusJakartaSans, syne } from "@/fonts";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Logo } from "@/components/logo";
 import { Analytics } from "@vercel/analytics/next";
@@ -26,7 +26,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background antialiased",
-          publicSans.className,
+          plusJakartaSans.className,
           syne.variable,
         )}
       >

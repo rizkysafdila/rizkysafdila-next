@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
-import { VerifiedIcon } from "lucide-react"
+import { ShieldCheckIcon } from "lucide-react"
 import { BlurFade } from "@/components/magicui/blur-fade"
 import { BaseCard } from "@/components/base-card"
 import { IProfile } from "@/types/profile.type"
@@ -37,7 +37,7 @@ export function ProfileCard({ data }: IProfileCard) {
             <h1 className="text-lg font-semibold">
               {data?.name}
             </h1>
-            {data?.is_verified && <VerifiedIcon className="size-5 text-blue-500" />}
+            {data?.is_verified && <ShieldCheckIcon className="size-5 text-blue-500" />}
           </div>
         </BlurFade>
         <BlurFade delay={0.75} inView>
@@ -53,7 +53,7 @@ export function ProfileCard({ data }: IProfileCard) {
 const StatusIndicator = ({ isAvailable }: { isAvailable: boolean }) => {
   return (
     <div
-      className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs text-white hover:text-gray-100 rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
+      className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs dark:text-muted rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
     >
       <span className="relative flex size-2">
         <span
