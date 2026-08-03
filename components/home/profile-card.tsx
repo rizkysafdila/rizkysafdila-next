@@ -53,7 +53,7 @@ export function ProfileCard({ data }: IProfileCard) {
 const StatusIndicator = ({ isAvailable }: { isAvailable: boolean }) => {
   return (
     <div
-      className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs dark:text-muted rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
+      className="gap-2 absolute top-3 inset-x-0 w-fit mx-auto flex items-center px-2 py-1 text-xs max-sm:text-white dark:max-sm:text-white dark:text-muted rounded-full bg-gray-400/10 bg-clip-padding backdrop-blur-sm hover:no-underline"
     >
       <span className="relative flex size-2">
         <span
