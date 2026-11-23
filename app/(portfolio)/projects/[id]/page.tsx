@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { RichText } from "@/components/rich-text"
 import { SkillBadge } from "@/components/skill"
+import { cn } from "@/lib/utils"
 import { BlurFade } from "@/components/magicui/blur-fade"
 import {
   Carousel,
@@ -40,6 +41,10 @@ function getImageUrls(project: IProjectDetail): string[] {
   return urls.length > 0 ? urls : [project.thumbnail_url].filter(Boolean)
 }
 
+/** Dark glass pill: readable over both light and dark screenshots, in either theme. */
+const galleryNavClass =
+  "size-9 border-white/20 bg-black/60 text-white shadow-md backdrop-blur-sm hover:bg-black/80 hover:text-white dark:border-white/20 dark:bg-black/60 dark:hover:bg-black/80"
+
 function ProjectGallery({ images }: { images: string[] }) {
   return (
     <Carousel className="w-full" opts={{ loop: images.length > 1 }}>
@@ -60,8 +65,8 @@ function ProjectGallery({ images }: { images: string[] }) {
       </CarouselContent>
       {images.length > 1 && (
         <>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          <CarouselPrevious className={cn("left-2", galleryNavClass)} />
+          <CarouselNext className={cn("right-2", galleryNavClass)} />
         </>
       )}
     </Carousel>
