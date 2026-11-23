@@ -39,8 +39,11 @@ export default function RootLayout({
               {children}
             </Suspense>
           </main>
-          <footer className="overflow-hidden px-6 md:hidden">
-            <Logo className="block w-full select-none whitespace-nowrap text-center text-[15vw] leading-none tracking-tighter opacity-50 mask-[linear-gradient(to_bottom,black,transparent)]" />
+          <footer className="overflow-hidden pt-8">
+            <p className="mx-auto mb-4 max-w-5xl px-6 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              © {new Date().getFullYear()} Rizky Safdila
+            </p>
+            <Logo className="block w-full px-6 select-none whitespace-nowrap text-center text-[15vw] leading-none tracking-tighter opacity-50 mask-[linear-gradient(to_bottom,black,transparent)]" />
           </footer>
         </Providers>
 

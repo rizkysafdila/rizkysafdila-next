@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero/hero"
 import { AboutSection } from "@/components/sections/about-section"
 import { WorkSection } from "@/components/sections/work-section"
 import { CareerSection } from "@/components/sections/career-section"
+import { ContactSection } from "@/components/sections/contact-section"
 import { fetchProfile } from "@/services/profile"
 import { fetchProjects } from "@/services/project"
 import { fetchCareers } from "@/services/career"
@@ -23,6 +24,7 @@ export default async function Home() {
       <AboutSection profile={profile ?? null} entries={careerEntries} projectCount={allProjects.length} />
       <WorkSection projects={featuredProjects} />
       <CareerSection entries={careerEntries} />
+      <ContactSection isAvailable={profile?.is_available ?? false} />
     </>
   )
 }
