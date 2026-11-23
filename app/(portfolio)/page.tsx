@@ -7,6 +7,7 @@ import { Ripple } from "@/components/ui/ripple"
 // import { WordRotate } from "@/components/ui/word-rotate"
 import { fetchProfile } from "@/services/profile"
 import { ContactInfo } from "@/components/home/contact-info"
+import { Hero } from "@/components/hero/hero"
 
 export default async function Home() {
   const [{ profile }, { projects }] = await Promise.all([
@@ -15,6 +16,8 @@ export default async function Home() {
   ])
 
   return (
+    <>
+    <Hero profile={profile ?? null} />
     <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-1 md:max-w-sm md:mx-auto">
@@ -51,5 +54,6 @@ export default async function Home() {
         </div>
       </div>
     </div>
+    </>
   )
 }
