@@ -21,7 +21,9 @@ export function Section({ id, index, label, title, aside, className, children }:
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             ({index}) {label}
           </p>
-          <h2 className="font-syne text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl">
+          {/* leading-[0.95] makes the line box shorter than descenders (g, y);
+              pb grows the box to hold them, -mb gives the space back */}
+          <h2 className="-mb-[0.2em] pb-[0.2em] font-syne text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl">
             {title}
           </h2>
         </div>
