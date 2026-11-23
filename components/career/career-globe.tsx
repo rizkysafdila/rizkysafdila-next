@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import { cn, shortCompany } from "@/lib/utils"
 import { LOCATION_COORDS } from "@/constants/locations"
 import type { CareerEntry } from "@/types/career.type"
+import { useWebGLSupport } from "@/hooks/use-webgl-support"
 
 interface CareerGlobeProps {
   entries: CareerEntry[]
@@ -32,6 +33,9 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
   const dragOffset = useRef(0)
   const { resolvedTheme } = useTheme()
   const [ready, setReady] = useState(false)
+  const webgl = useWebGLSupport()
+  const [failed, setFailed] = useState(false)
+  const showGlobe = webgl === true && !failed
 
   const places = useMemo<Place[]>(() => {
     const map = new Map<string, Place>()
@@ -50,7 +54,7 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas || places.length === 0) return
+    if (!canvas || places.length === 0 || !showGlobe) return
 
     const dark = resolvedTheme === "dark"
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -70,7 +74,9 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
     window.addEventListener("resize", onResize)
 
     let t = 0
-    const globe = createGlobe(canvas, {
+    let globe: ReturnType<typeof createGlobe>
+    try {
+      globe = createGlobe(canvas, {
       devicePixelRatio: dpr,
       width: width * dpr,
       height: width * dpr,
@@ -100,6 +106,12 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
         state.height = width * dpr
       },
     })
+    } catch {
+      // WebGL context lost / unavailable → legend-only fallback
+      window.removeEventListener("resize", onResize)
+      setFailed(true)
+      return
+    }
 
     const showTimer = setTimeout(() => setReady(true), 50)
 
@@ -115,12 +127,13 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
       window.removeEventListener("resize", onResize)
       globe.destroy()
     }
-  }, [places, resolvedTheme])
+  }, [places, resolvedTheme, showGlobe])
 
   if (places.length === 0) return null
 
   return (
     <div className={cn("flex flex-col items-center gap-3", className)}>
+      {showGlobe && (
       <div className="relative aspect-square w-full">
         <canvas
           ref={canvasRef}
@@ -146,6 +159,7 @@ export function CareerGlobe({ entries, className }: CareerGlobeProps) {
           }}
         />
       </div>
+      )}
 
       <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
         {places.map((place) => (
