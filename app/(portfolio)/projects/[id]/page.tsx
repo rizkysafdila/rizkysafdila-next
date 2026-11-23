@@ -82,14 +82,33 @@ export default async function ProjectDetail({
   const period = getPeriod(project.start_date, project.end_date)
 
   return (
-    <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5">
+    <div className="mx-auto max-w-5xl px-6 pt-32 pb-24">
       <BlurFade delay={0.2} inView>
-        <Button asChild variant="ghost" className="mb-6 -ml-2 gap-1.5">
-          <Link href="/projects">
-            <ArrowLeft className="size-4" />
-            Back to Projects
-          </Link>
-        </Button>
+        <Link
+          href="/projects"
+          className="group mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+          All projects
+        </Link>
+      </BlurFade>
+
+      <BlurFade delay={0.25} inView>
+        <header className="mb-8">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            {period || "Project"}
+          </p>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h1 className="font-syne text-4xl font-bold leading-[0.95] tracking-tight md:text-6xl">{project.title}</h1>
+            {project.is_featured && (
+              <Badge variant="secondary" className="shrink-0 rounded-full bg-lime-500 text-neutral-950 dark:bg-lime-500">
+                <Pin className="mr-1 size-3.5" />
+                Featured
+              </Badge>
+            )}
+          </div>
+          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{project.subtitle}</p>
+        </header>
       </BlurFade>
 
       <BlurFade delay={0.3} inView>
@@ -97,24 +116,6 @@ export default async function ProjectDetail({
           <ProjectGallery images={images} />
 
           <div className="mt-6 space-y-4">
-            <div className="flex items-start justify-between gap-3">
-            <h1 className="text-2xl font-semibold leading-snug">{project.title}</h1>
-            {project.is_featured && (
-              <Badge
-                variant="secondary"
-                className="shrink-0 rounded-full bg-lime-500 dark:bg-lime-600"
-              >
-                <Pin className="mr-1 size-3.5" />
-                Featured
-              </Badge>
-            )}
-          </div>
-
-          <p className="text-muted-foreground">
-            {project.subtitle}
-            {period && <> · {period}</>}
-          </p>
-
           <RichText
             html={project.description}
             className="text-sm leading-relaxed text-muted-foreground"
