@@ -42,6 +42,9 @@ export async function fetchProjectById(id: string) {
       project_images(id, project_id, image_url, created_at)
     `)
     .eq('id', id)
+    // Gallery order: upload time, then file name for rows inserted together
+    .order('created_at', { referencedTable: 'project_images', ascending: true })
+    .order('image_url', { referencedTable: 'project_images', ascending: true })
     .single()
 
   const project: IProjectDetail | null = data
