@@ -28,6 +28,8 @@ export const SKILL_ICON_MAP: Record<string, string> = {
   Pinia: 'logos:pinia',
   Claude: 'material-icon-theme:claude',
   Docker: 'logos:docker-icon',
+  Inertiajs: 'devicon:inertiajs',
+  Prisma: 'devicon-plain:prisma',
 };
 
 export const skills = [
