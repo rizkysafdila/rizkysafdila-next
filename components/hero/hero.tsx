@@ -1,67 +1,16 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import dynamic from "next/dynamic"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useWebGLSupport } from "@/hooks/use-webgl-support"
 import { LocalTime } from "@/components/local-time"
 import type { IProfile } from "@/types/profile.type"
-import { SceneErrorBoundary } from "./scene-error-boundary"
 import { NAME_BOTTOM_RESERVE, NAME_TOP_RESERVE } from "./constants"
 
-const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false })
-
-/** Average advance width of a Syne 800 capital, in em (used to size the DOM name) */
+/** Average advance width of a Syne 800 capital, in em (used to size the name) */
 const NAME_EM_PER_CHAR = 1.35
 
 const TAGLINE = "Software engineer building reliable products for the web."
 
-type Mode = "pending" | "3d" | "fallback"
-
 export function Hero({ profile }: { profile: IProfile | null }) {
-  const sectionRef = useRef<HTMLElement>(null)
-  // three.js needs WebGL2 (no WebGL1 renderer since r163)
-  const webgl = useWebGLSupport({ require2: true })
-  const { resolvedTheme } = useTheme()
-  const [reduceMotion, setReduceMotion] = useState<boolean | null>(null)
-  const [inView, setInView] = useState(true)
-  const [sceneReady, setSceneReady] = useState(false)
-  const [sceneFailed, setSceneFailed] = useState(false)
-  // DOM name stays visible until the 3D name has drawn, then fades out and goes sr-only
-  const [nameHandedOff, setNameHandedOff] = useState(false)
-
-  useEffect(() => {
-    if (!sceneReady) return
-    const t = window.setTimeout(() => setNameHandedOff(true), 1000)
-    return () => window.clearTimeout(t)
-  }, [sceneReady])
-
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const update = () => setReduceMotion(query.matches)
-    update()
-    query.addEventListener("change", update)
-    return () => query.removeEventListener("change", update)
-  }, [])
-
-  useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting))
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  const mode: Mode =
-    webgl === null || reduceMotion === null
-      ? "pending"
-      : webgl && !reduceMotion && !sceneFailed
-        ? "3d"
-        : "fallback"
-
   const name = profile?.name ?? "Muhammad Rizky Safdila"
   const nameLines = name.toUpperCase().split(/\s+/).filter(Boolean)
   // Syne 800 caps average ~1.32em per letter (wide M/W): fit the longest line to ~88vw and
@@ -71,33 +20,11 @@ export function Hero({ profile }: { profile: IProfile | null }) {
   const role = profile?.jobTitle ?? "Software Engineer"
 
   return (
-    <section ref={sectionRef} id="home" className="relative h-svh min-h-[560px] overflow-hidden">
-      {mode === "3d" && (
-        <div
-          className={cn(
-            "absolute inset-0 transition-opacity duration-1000",
-            sceneReady ? "opacity-100" : "opacity-0",
-          )}
-        >
-          <SceneErrorBoundary onError={() => setSceneFailed(true)}>
-            <HeroScene lines={nameLines} inView={inView} dark={resolvedTheme === "dark"} onReady={() => setSceneReady(true)} />
-          </SceneErrorBoundary>
-        </div>
-      )}
-
-      {/* Real name for SEO / screen readers; visible giant type when the 3D scene isn't used */}
+    <section id="home" className="relative h-svh min-h-[560px] overflow-hidden">
+      {/* Giant name, one word per line, fitted between the top meta row and the bottom block */}
       <h1
-        className={cn(
-          mode === "3d" && nameHandedOff
-            ? "sr-only"
-            : "pointer-events-none absolute inset-x-0 flex flex-col items-center justify-center text-center font-syne leading-[0.85] font-extrabold tracking-tighter transition-opacity duration-1000",
-          (mode === "pending" || (mode === "3d" && sceneReady)) && "opacity-0",
-        )}
-        style={
-          mode === "3d" && nameHandedOff
-            ? undefined
-            : { fontSize: nameFontSize, top: NAME_TOP_RESERVE, bottom: NAME_BOTTOM_RESERVE }
-        }
+        className="pointer-events-none absolute inset-x-0 flex flex-col items-center justify-center text-center font-syne leading-[0.85] font-extrabold tracking-tighter"
+        style={{ fontSize: nameFontSize, top: NAME_TOP_RESERVE, bottom: NAME_BOTTOM_RESERVE }}
       >
         <span className="sr-only">{name}</span>
         {nameLines.map((line, i) => (
