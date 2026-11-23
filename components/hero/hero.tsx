@@ -10,8 +10,12 @@ import { useWebGLSupport } from "@/hooks/use-webgl-support"
 import { LocalTime } from "@/components/local-time"
 import type { IProfile } from "@/types/profile.type"
 import { SceneErrorBoundary } from "./scene-error-boundary"
+import { NAME_BOTTOM_RESERVE, NAME_TOP_RESERVE } from "./constants"
 
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false })
+
+/** Average advance width of a Syne 800 capital, in em (used to size the DOM name) */
+const NAME_EM_PER_CHAR = 1.35
 
 const TAGLINE = "Software engineer building reliable products for the web."
 
@@ -58,7 +62,12 @@ export function Hero({ profile }: { profile: IProfile | null }) {
         ? "3d"
         : "fallback"
 
-  const name = profile?.name ?? "Rizky Safdila"
+  const name = profile?.name ?? "Muhammad Rizky Safdila"
+  const nameLines = name.toUpperCase().split(/\s+/).filter(Boolean)
+  // Syne 800 caps average ~1.32em per letter (wide M/W): fit the longest line to ~88vw and
+  // the whole block between the top meta row and the bottom tagline block
+  const longest = Math.max(...nameLines.map((l) => l.length))
+  const nameFontSize = `min(${(88 / (longest * NAME_EM_PER_CHAR)).toFixed(2)}vw, calc((100svh - ${NAME_TOP_RESERVE + NAME_BOTTOM_RESERVE}px) / ${(nameLines.length * 0.9).toFixed(2)}))`
   const role = profile?.jobTitle ?? "Software Engineer"
 
   return (
@@ -71,7 +80,7 @@ export function Hero({ profile }: { profile: IProfile | null }) {
           )}
         >
           <SceneErrorBoundary onError={() => setSceneFailed(true)}>
-            <HeroScene inView={inView} dark={resolvedTheme === "dark"} onReady={() => setSceneReady(true)} />
+            <HeroScene lines={nameLines} inView={inView} dark={resolvedTheme === "dark"} onReady={() => setSceneReady(true)} />
           </SceneErrorBoundary>
         </div>
       )}
@@ -81,13 +90,21 @@ export function Hero({ profile }: { profile: IProfile | null }) {
         className={cn(
           mode === "3d" && nameHandedOff
             ? "sr-only"
-            : "pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center font-syne text-[clamp(2.5rem,12vw,12rem)] leading-[0.85] font-extrabold tracking-tighter transition-opacity duration-1000",
+            : "pointer-events-none absolute inset-x-0 flex flex-col items-center justify-center text-center font-syne leading-[0.85] font-extrabold tracking-tighter transition-opacity duration-1000",
           (mode === "pending" || (mode === "3d" && sceneReady)) && "opacity-0",
         )}
+        style={
+          mode === "3d" && nameHandedOff
+            ? undefined
+            : { fontSize: nameFontSize, top: NAME_TOP_RESERVE, bottom: NAME_BOTTOM_RESERVE }
+        }
       >
         <span className="sr-only">{name}</span>
-        <span aria-hidden="true">RIZKY</span>
-        <span aria-hidden="true">SAFDILA</span>
+        {nameLines.map((line, i) => (
+          <span key={i} aria-hidden="true">
+            {line}
+          </span>
+        ))}
       </h1>
 
       {/* Top meta row */}
