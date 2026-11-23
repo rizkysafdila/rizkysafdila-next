@@ -43,7 +43,7 @@ function TimelineDot({
       onClick={onClick}
       aria-label={active ? "Collapse entry" : "Expand entry"}
       className={cn(
-        "relative z-10 mt-1 h-2.5 w-2.5 shrink-0 rounded-full border-[1.5px] outline-none transition-all duration-300",
+        "relative z-10 mt-1 size-[11px] shrink-0 rounded-full border-[1.5px] outline-none transition-all duration-300",
         "focus-visible:ring-2 focus-visible:ring-lime-500/40",
         active
           ? "border-lime-500 bg-lime-500 shadow-[0_0_0_4px_rgba(165,229,71,0.12)]"
@@ -102,16 +102,20 @@ export function TimelineEntry({
         </span>
       </div>
 
-      {/* ── Dot + vertical line ── */}
-      <div className="relative flex flex-col items-center sm:w-5">
+      {/* ── Dot + vertical line ──
+       * Odd sizes (11px dot, 11/21px column) put the dot centre on a half pixel,
+       * so a 1px line at calc(50% - 0.5px) sits exactly on whole pixels, centred.
+       * Keep in sync with the progress line + DOT_CENTER in career-timeline.tsx.
+       */}
+      <div className="relative flex w-[11px] shrink-0 flex-col items-center sm:w-[21px]">
         {/* Line above dot */}
         {!isFirst && (
-          <div className="absolute bottom-[calc(100%-4px)] top-0 w-px -translate-x-px bg-border" />
+          <div className="absolute left-[calc(50%-0.5px)] top-0 h-1 w-px bg-border" />
         )}
         <TimelineDot active={expanded || !!entry.current} onClick={toggle} />
         {/* Line below dot */}
         {!isLast && (
-          <div className="absolute bottom-0 top-[calc(0%+14px)] w-px -translate-x-px bg-border" />
+          <div className="absolute bottom-0 left-[calc(50%-0.5px)] top-[15px] w-px bg-border" />
         )}
       </div>
 

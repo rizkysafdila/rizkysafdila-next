@@ -10,8 +10,8 @@ interface CareerTimelineProps {
   entries: CareerEntry[]
 }
 
-/** Vertical offset of a dot's centre from the top of its entry (mt-1 + half of h-2.5) */
-const DOT_CENTER = 9
+/** Vertical offset of a dot's centre from the top of its entry (mt-1 + half of the 11px dot) */
+const DOT_CENTER = 9.5
 
 export function CareerTimeline({ entries }: CareerTimelineProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -45,11 +45,12 @@ export function CareerTimeline({ entries }: CareerTimelineProps) {
 
   return (
     <div ref={ref} className="relative flex flex-col">
-      {/* Scroll-drawn progress line over the grey rail (rail x: 5px mobile, 154px sm+) */}
+      {/* Scroll-drawn progress line over the grey rail. Left edge = dot centre - 0.5px:
+          mobile 11px column → 5px; sm+ 144px year column + 21px dot column → 154px */}
       <motion.div
         aria-hidden="true"
         data-timeline-progress
-        className="pointer-events-none absolute left-[4px] z-[5] w-px origin-top bg-lime-500 sm:left-[153px]"
+        className="pointer-events-none absolute left-[5px] z-[5] w-px origin-top bg-lime-500 sm:left-[154px]"
         style={{ top: DOT_CENTER, height: railHeight, scaleY: progress }}
       />
       {entries.map((entry, index) => (
