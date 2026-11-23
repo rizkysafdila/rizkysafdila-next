@@ -13,7 +13,7 @@ export function TechCard() {
     <BaseCard>
       <CardHeader className="px-2 py-0">
         <BlurFade delay={0.5} inView>
-          <h2 className="text-lg font-semibold">Technologies</h2>
+          <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Stack</h3>
         </BlurFade>
       </CardHeader>
       <CardContent className="p-2">

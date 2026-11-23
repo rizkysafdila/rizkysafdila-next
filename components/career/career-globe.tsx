@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import createGlobe from "cobe"
 import { useTheme } from "next-themes"
-import { cn } from "@/lib/utils"
+import { cn, shortCompany } from "@/lib/utils"
 import { LOCATION_COORDS } from "@/constants/locations"
 import type { CareerEntry } from "@/types/career.type"
 
@@ -24,11 +24,6 @@ const LIME: [number, number, number] = [0.486, 0.812, 0]
 /** cobe angles that put [lat, lng] in the middle of the globe */
 function locationToAngles([lat, lng]: [number, number]): [number, number] {
   return [Math.PI - ((lng * Math.PI) / 180 - Math.PI / 2), (lat * Math.PI) / 180]
-}
-
-function shortCompany(company: string | null) {
-  // "Cerebrum.id (PT Cerebrum Edukanesia Nusantara)" -> "Cerebrum.id"
-  return (company ?? "").replace(/\s*\(.*\)\s*$/, "")
 }
 
 export function CareerGlobe({ entries, className }: CareerGlobeProps) {

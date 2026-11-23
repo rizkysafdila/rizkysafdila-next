@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/** "Cerebrum.id (PT Cerebrum Edukanesia Nusantara)" -> "Cerebrum.id" */
+export function shortCompany(company: string | null | undefined) {
+  return (company ?? "").replace(/\s*\(.*\)\s*$/, "")
+}
+
 export function formatPeriod(
   start: string,
   end: string | null

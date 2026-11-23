@@ -9,7 +9,7 @@ export function SummaryCard() {
     <BaseCard>
       <CardHeader className="px-2 py-0">
         <BlurFade delay={0.5} inView className="flex justify-between items-center-safe">
-          <h2 className="text-lg font-semibold">About Me</h2>
+          <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Summary</h3>
           {/* <Link href={RESUME_LINK} target="_blank">
             <Button
               variant="outline"

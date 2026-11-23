@@ -1,59 +1,23 @@
-import { ProfileCard } from "@/components/home/profile-card"
-import { SummaryCard } from "@/components/home/summary-card"
-import { TechCard } from "@/components/home/tech-card"
-import { ProjectCard } from "@/components/home/project-card"
-import { fetchProjects } from "@/services/project"
-import { Ripple } from "@/components/ui/ripple"
-// import { WordRotate } from "@/components/ui/word-rotate"
-import { fetchProfile } from "@/services/profile"
-import { ContactInfo } from "@/components/home/contact-info"
 import { Hero } from "@/components/hero/hero"
+import { AboutSection } from "@/components/sections/about-section"
+import { fetchProfile } from "@/services/profile"
+import { fetchProjects } from "@/services/project"
+import { fetchCareers } from "@/services/career"
 
 export default async function Home() {
-  const [{ profile }, { projects }] = await Promise.all([
+  const [{ profile }, { projects }, { entries }] = await Promise.all([
     fetchProfile(),
-    fetchProjects({ is_featured: true }),
+    fetchProjects(),
+    fetchCareers(),
   ])
+
+  const allProjects = projects ?? []
+  const careerEntries = entries ?? []
 
   return (
     <>
-    <Hero profile={profile ?? null} />
-    <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5 space-y-4">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-1 md:max-w-sm md:mx-auto">
-          <ProfileCard data={profile!} />
-        </div>
-
-        <div className="lg:col-span-2 flex flex-col gap-4">
-          <SummaryCard />
-          <TechCard />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2">
-          <ProjectCard projects={projects!} />
-        </div>
-        <div className="lg:col-span-1 bg-white dark:bg-gray-950 h-100 lg:h-full rounded-xl overflow-hidden relative flex justify-center items-center">
-          {/* <ContactCard /> */}
-          <Ripple />
-
-          {/* <WordRotate
-            className="text-2xl font-semibold font-syne"
-            words={[
-              "Made with",
-              { text: "Love", color: "#EC4899" },
-              { text: "Hate", color: "#f59e0b" },
-              "and",
-              { text: "Claude", color: "#D85A30" },
-            ]}
-            duration={1500}
-          /> */}
-
-          <ContactInfo />
-        </div>
-      </div>
-    </div>
+      <Hero profile={profile ?? null} />
+      <AboutSection profile={profile ?? null} entries={careerEntries} projectCount={allProjects.length} />
     </>
   )
 }
