@@ -15,7 +15,7 @@ export default async function Home() {
   ])
 
   return (
-    <div className="my-16 md:my-5 space-y-4">
+    <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5 space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-1 md:max-w-sm md:mx-auto">
           <ProfileCard data={profile!} />

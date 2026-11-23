@@ -24,6 +24,8 @@ interface TiltCardProps extends React.ComponentProps<"div"> {
  * popped-out child needs `transform-3d` so depth isn't flattened.
  *
  * Mouse only: touch devices and `prefers-reduced-motion` get a flat card.
+ * Reduced motion is checked in the pointer handler (not at render) so server
+ * and client markup always match.
  */
 export function TiltCard({
   children,
@@ -73,10 +75,10 @@ export function TiltCard({
     >
       <motion.div
         className="relative h-full transform-3d"
-        style={reduceMotion ? undefined : { rotateX, rotateY }}
+        style={{ rotateX, rotateY }}
       >
         {children}
-        {glare && !reduceMotion && (
+        {glare && (
           <motion.div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-30 rounded-xl mix-blend-overlay translate-z-[1px]"

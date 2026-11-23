@@ -9,7 +9,7 @@ export default async function Projects() {
   const { projects } = await fetchProjects()
 
   return (
-    <div className="my-16 md:my-5">
+    <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5">
       <Card className="relative w-full overflow-hidden shadow-none gap-4">
         <Meteors number={30} className="not-dark:hidden" />
         <CardHeader>

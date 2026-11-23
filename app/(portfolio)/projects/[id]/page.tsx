@@ -82,7 +82,7 @@ export default async function ProjectDetail({
   const period = getPeriod(project.start_date, project.end_date)
 
   return (
-    <div className="my-16 md:my-5">
+    <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6 my-16 md:my-5">
       <BlurFade delay={0.2} inView>
         <Button asChild variant="ghost" className="mb-6 -ml-2 gap-1.5">
           <Link href="/projects">
