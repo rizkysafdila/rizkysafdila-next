@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
+import { CommandMenu } from "@/components/command-menu";
 import { cn } from "@/lib/utils";
 import { jetbrainsMono, plusJakartaSans, syne } from "@/fonts";
 import { ShaderBackground } from "@/components/immersive/shader-background";
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Providers>
           <ShaderBackground />
           <Navbar />
+          <CommandMenu />
           <main>
             <Suspense fallback={<LoadingScreen variant="dot-wave" />}>
               {children}
