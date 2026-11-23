@@ -58,6 +58,7 @@
 }
 
 :root {
+  --magic-card-gradient: #D9D9D955;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -93,6 +94,7 @@
 }
 
 .dark {
+  --magic-card-gradient: #262626;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -168,5 +170,13 @@
   100% {
     transform: rotate(var(--angle)) translateX(-500px);
     opacity: 0;
+  }
+}
+
+/* Reduced motion: entrance animations may only fade (no blur); transforms are
+   skipped via <MotionConfig reducedMotion="user"> in Providers. */
+@media (prefers-reduced-motion: reduce) {
+  [data-blur-fade] {
+    filter: none !important;
   }
 }

@@ -11,6 +11,7 @@ interface HeroSceneProps {
   /** Render loop runs only while the hero is on screen */
   inView: boolean
   dark: boolean
+  /** Fires once both name lines are laid out with the real font (i.e. visibly drawn) */
   onReady?: () => void
 }
 
@@ -28,7 +29,13 @@ function useWindowPointer() {
   return pointer
 }
 
-function Name({ dark }: { dark: boolean }) {
+function Name({ dark, onReady }: { dark: boolean; onReady?: () => void }) {
+  // troika lays text out asynchronously (font fetch + worker); wait for both lines
+  const synced = useRef(0)
+  const onSync = () => {
+    synced.current += 1
+    if (synced.current === 2) onReady?.()
+  }
   const { viewport, camera } = useThree()
   // Viewport size measured at the text's depth
   const vp = viewport.getCurrentViewport(camera, new THREE.Vector3(0, 0, -1))
@@ -38,10 +45,10 @@ function Name({ dark }: { dark: boolean }) {
 
   return (
     <group position={[0, 0, -1]}>
-      <Text font={FONT_URL} fontSize={size} color={color} anchorX="center" anchorY="middle" position={[0, size * 0.47, 0]} letterSpacing={-0.02}>
+      <Text font={FONT_URL} fontSize={size} color={color} anchorX="center" anchorY="middle" position={[0, size * 0.47, 0]} letterSpacing={-0.02} onSync={onSync}>
         RIZKY
       </Text>
-      <Text font={FONT_URL} fontSize={size} color={color} anchorX="center" anchorY="middle" position={[0, -size * 0.47, 0]} letterSpacing={-0.02}>
+      <Text font={FONT_URL} fontSize={size} color={color} anchorX="center" anchorY="middle" position={[0, -size * 0.47, 0]} letterSpacing={-0.02} onSync={onSync}>
         SAFDILA
       </Text>
     </group>
@@ -96,7 +103,6 @@ export default function HeroScene({ inView, dark, onReady }: HeroSceneProps) {
       gl={{ antialias: true, alpha: true }}
       camera={{ position: [0, 0, 6], fov: 35 }}
       frameloop={inView ? "always" : "never"}
-      onCreated={() => onReady?.()}
     >
       <ambientLight intensity={0.6} />
       {/* Local light rig instead of a remote HDR preset — no network fetch */}
@@ -106,7 +112,7 @@ export default function HeroScene({ inView, dark, onReady }: HeroSceneProps) {
         <Lightformer form="rect" intensity={2} color="#2b7fff" position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[6, 2, 1]} />
         <Lightformer form="ring" intensity={3} position={[0, 0, -5]} scale={4} />
       </Environment>
-      <Name dark={dark} />
+      <Name dark={dark} onReady={onReady} />
       <Glass dark={dark} pointer={pointer} />
     </Canvas>
   )

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { useWebGLSupport } from "@/hooks/use-webgl-support"
 import { LocalTime } from "@/components/local-time"
 import type { IProfile } from "@/types/profile.type"
+import { SceneErrorBoundary } from "./scene-error-boundary"
 
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false })
 
@@ -18,11 +19,21 @@ type Mode = "pending" | "3d" | "fallback"
 
 export function Hero({ profile }: { profile: IProfile | null }) {
   const sectionRef = useRef<HTMLElement>(null)
-  const webgl = useWebGLSupport()
+  // three.js needs WebGL2 (no WebGL1 renderer since r163)
+  const webgl = useWebGLSupport({ require2: true })
   const { resolvedTheme } = useTheme()
   const [reduceMotion, setReduceMotion] = useState<boolean | null>(null)
   const [inView, setInView] = useState(true)
   const [sceneReady, setSceneReady] = useState(false)
+  const [sceneFailed, setSceneFailed] = useState(false)
+  // DOM name stays visible until the 3D name has drawn, then fades out and goes sr-only
+  const [nameHandedOff, setNameHandedOff] = useState(false)
+
+  useEffect(() => {
+    if (!sceneReady) return
+    const t = window.setTimeout(() => setNameHandedOff(true), 1000)
+    return () => window.clearTimeout(t)
+  }, [sceneReady])
 
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -41,7 +52,11 @@ export function Hero({ profile }: { profile: IProfile | null }) {
   }, [])
 
   const mode: Mode =
-    webgl === null || reduceMotion === null ? "pending" : webgl && !reduceMotion ? "3d" : "fallback"
+    webgl === null || reduceMotion === null
+      ? "pending"
+      : webgl && !reduceMotion && !sceneFailed
+        ? "3d"
+        : "fallback"
 
   const name = profile?.name ?? "Rizky Safdila"
   const role = profile?.jobTitle ?? "Software Engineer"
@@ -55,17 +70,19 @@ export function Hero({ profile }: { profile: IProfile | null }) {
             sceneReady ? "opacity-100" : "opacity-0",
           )}
         >
-          <HeroScene inView={inView} dark={resolvedTheme === "dark"} onReady={() => setSceneReady(true)} />
+          <SceneErrorBoundary onError={() => setSceneFailed(true)}>
+            <HeroScene inView={inView} dark={resolvedTheme === "dark"} onReady={() => setSceneReady(true)} />
+          </SceneErrorBoundary>
         </div>
       )}
 
       {/* Real name for SEO / screen readers; visible giant type when the 3D scene isn't used */}
       <h1
         className={cn(
-          mode === "3d"
+          mode === "3d" && nameHandedOff
             ? "sr-only"
-            : "pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center font-syne text-[clamp(2.5rem,12vw,12rem)] leading-[0.85] font-extrabold tracking-tighter",
-          mode === "pending" && "opacity-0",
+            : "pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center font-syne text-[clamp(2.5rem,12vw,12rem)] leading-[0.85] font-extrabold tracking-tighter transition-opacity duration-1000",
+          (mode === "pending" || (mode === "3d" && sceneReady)) && "opacity-0",
         )}
       >
         <span className="sr-only">{name}</span>

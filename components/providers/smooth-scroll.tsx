@@ -2,34 +2,47 @@
 
 import { useEffect, useState } from "react"
 import { ReactLenis, useLenis } from "lenis/react"
+import { usePathname } from "next/navigation"
 
 /**
- * Re-applies a URL hash (`/#career`) after hydration. The browser jumps to the
- * anchor on load, but client-only tiles mount afterwards and push sections down,
- * so we scroll again once layout has settled.
+ * Re-applies a URL hash (`/#career`) after a full load *and* after client-side
+ * navigation (e.g. dock link from /projects). The target may not exist yet
+ * (loading UI / streaming), so poll until it does, then scroll again once
+ * layout has settled.
  */
 function HashScroll() {
   const lenis = useLenis()
+  const pathname = usePathname()
 
   useEffect(() => {
     const id = decodeURIComponent(window.location.hash.slice(1))
     if (!id) return
 
-    const scroll = () => {
-      const target = document.getElementById(id)
-      if (!target) return
+    const scrollTo = (target: HTMLElement) => {
       if (lenis) {
         // Lenis caches page height; refresh it so the scroll isn't clamped short
         lenis.resize()
         // Lenis honours the section's CSS `scroll-margin-top` (scroll-mt-24), like native
         lenis.scrollTo(target, { immediate: true, force: true })
+      } else {
+        target.scrollIntoView()
       }
-      else target.scrollIntoView()
     }
 
-    const timers = [150, 800].map((ms) => window.setTimeout(scroll, ms))
+    const timers: number[] = []
+    let tries = 0
+    const find = () => {
+      const target = document.getElementById(id)
+      if (target) {
+        scrollTo(target)
+        timers.push(window.setTimeout(() => scrollTo(target), 400))
+        return
+      }
+      if (++tries < 40) timers.push(window.setTimeout(find, 100))
+    }
+    timers.push(window.setTimeout(find, 50))
     return () => timers.forEach((t) => window.clearTimeout(t))
-  }, [lenis])
+  }, [lenis, pathname])
 
   return null
 }
