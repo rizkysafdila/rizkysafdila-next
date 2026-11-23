@@ -11,9 +11,13 @@ import { TiltCard } from '@/components/immersive/tilt-card'
 
 type ProjectCardProps = {
   data: TProject
+  /** "large" = taller thumbnail + bigger title (home "Selected work") */
+  size?: "default" | "large"
 }
 
-export function ProjectList({ data, className }: ProjectCardProps & React.ComponentProps<"div">) {
+export function ProjectList({ data, size = "default", className }: ProjectCardProps & React.ComponentProps<"div">) {
+  const large = size === "large"
+
   return (
     <Link href={`/projects/${data.id}`} className={cn("group block", className)}>
       <TiltCard className="h-full">
@@ -35,7 +39,7 @@ export function ProjectList({ data, className }: ProjectCardProps & React.Compon
                 alt="Project thumbnail"
                 width={800}
                 height={160}
-                className="rounded-t-xl w-full h-40 object-cover"
+                className={cn("rounded-t-xl w-full object-cover", large ? "h-64" : "h-40")}
               />
               <div className="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 rounded-t-xl">
                 <Button
@@ -49,9 +53,9 @@ export function ProjectList({ data, className }: ProjectCardProps & React.Compon
             </div>
 
             <div className="p-4 translate-z-8">
-              <h1 className="font-semibold line-clamp-1 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors mb-2">
+              <h3 className={cn("font-semibold line-clamp-1 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors mb-2", large && "font-syne text-xl md:text-2xl")}>
                 {data?.title}
-              </h1>
+              </h3>
               <p className="text-sm text-muted-foreground line-clamp-2">
                 {data?.subtitle}
               </p>
