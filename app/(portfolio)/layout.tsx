@@ -4,7 +4,7 @@ import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { plusJakartaSans, syne } from "@/fonts";
-import { DotPattern } from "@/components/magicui/dot-pattern";
+import { ShaderBackground } from "@/components/immersive/shader-background";
 import { Logo } from "@/components/logo";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
@@ -30,13 +30,8 @@ export default function RootLayout({
           syne.variable,
         )}
       >
-        <DotPattern
-          className={cn(
-            "fixed inset-0 z-[-1]",
-            "mask-[radial-gradient(600px_circle_at_center,white,transparent)]"
-          )}
-        />
         <Providers>
+          <ShaderBackground />
           <div className="max-w-lg lg:max-w-5xl mx-auto py-12 sm:py-24 px-6">
             <Navbar />
             <main>
