@@ -23,7 +23,7 @@ export function AboutSection({ profile, entries, projectCount }: AboutSectionPro
 
   const stats = [
     { value: years, suffix: "+", label: "Years experience" },
-    { value: projectCount, suffix: "", label: "Projects shipped" },
+    { value: projectCount, suffix: "", label: "Essential projects" },
     { value: companies, suffix: "", label: "Companies" },
   ]
 
